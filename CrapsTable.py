@@ -50,7 +50,7 @@ def main():
     
     keepPlaying = 'yes'
     
-    while keepPlaying == "yes" or keepPlaying == "y":
+    while keepPlaying == "yes" or keepPlaying == "y" or keepPlaying == "Y":
         bet = int(input("How much would you like to bet? "))
         comeOut = True
         while comeOut == True:
