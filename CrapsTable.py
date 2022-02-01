@@ -33,6 +33,14 @@ class Player():
     def loser(self, w):
         self.__balance = self.__balance - w
         return self.__balance
+
+    def bigWinner(self, d):
+        self.__balance = self.__balance + d
+        return self.__balance
+    
+    def bigLoser(self, w):
+        self.__balance = self.__balance - w
+        return self.__balance
         
 
 
@@ -66,12 +74,25 @@ def main():
             elif (point == 4 or point == 5 or point == 6 or point == 8 or point == 9 or point == 10):
                 print("The point is :", point)
                 comeOut = False
+                backBet = int(input("Enter amount for back bet = "))
                 while comeOut == False:
                     x = rollDice()
-                    if (x == point):
-                        print(x, "Big Winner!")
+                    if (x == 4 or 10):
+                        print(x,"Big Winner!")
+                        backBet = backBet + (2 * backBet)
+                        bet = bet + backBet
                         Player1.winner(bet)
                         break
+                    elif (x == 5 or 9):
+                        print(x,"Big Winner!")
+                        backBet = backBet + (3/2 * backBet)
+                        bet = bet + backBet
+                        Player1.winner(bet)
+                    elif (x == 6 or 8):
+                        print(x,"Big Winner!")
+                        backBet = backBet + (7/6 * backBet)
+                        bet = bet + backBet
+                        Player1.winner(bet)
                     elif (x == 7):
                         print(x,"out, Loser!")
                         Player1.loser(bet)
