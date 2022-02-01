@@ -13,7 +13,6 @@ class Player():
     def setName(self):
         self.__name = name
     
-    
     def setBalance(self):
         self.__balance = balance
         
@@ -33,16 +32,6 @@ class Player():
     def loser(self, w):
         self.__balance = self.__balance - w
         return self.__balance
-
-    def bigWinner(self, d):
-        self.__balance = self.__balance + d
-        return self.__balance
-    
-    def bigLoser(self, w):
-        self.__balance = self.__balance - w
-        return self.__balance
-        
-
 
 def rollDice():
     die1 = random.randint(1,6)
