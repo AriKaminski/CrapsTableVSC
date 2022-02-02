@@ -46,6 +46,8 @@ def main():
     Player1.getStr()
     
     keepPlaying = 'yes'
+    if (Player1.getBalance() > 0):
+            keepPlaying = 'yes'
     
     while keepPlaying == "yes" or keepPlaying == "y" or keepPlaying == "Y":
         bet = int(input("How much would you like to bet? "))
@@ -66,23 +68,20 @@ def main():
                 backBet = int(input("Enter amount for back bet = "))
                 while comeOut == False:
                     x = rollDice()
-                    if (x == 4 or 10):
-                        print(x,"Big Winner!")
-                        backBet = backBet + (2 * backBet)
-                        bet = bet + backBet
-                        Player1.winner(bet)
-                        break
-                    elif (x == 5 or 9):
-                        print(x,"Big Winner!")
-                        backBet = backBet + (3/2 * backBet)
-                        bet = bet + backBet
-                        Player1.winner(bet)
-                    elif (x == 6 or 8):
-                        print(x,"Big Winner!")
-                        backBet = backBet + (7/6 * backBet)
-                        bet = bet + backBet
+                    if (x == point):
+                        print(x, "Big Winner!")
+                        if(point == 4 or 10):
+                            backBet = backBet + (2 * backBet)
+                            bet = bet + backBet
+                        elif(point == 5 or 9):
+                            backBet = backBet + (3/2 * backBet)
+                            bet = bet + backBet
+                        elif(point == 6 or 8):
+                            backBet = backBet + (7/6 * backBet)
+                            bet = bet + backBet
                         Player1.winner(bet)
                     elif (x == 7):
+                        bet = bet + backBet
                         print(x,"out, Loser!")
                         Player1.loser(bet)
                         break
@@ -98,9 +97,7 @@ def main():
         print("You beat the house!")
     else:
         print("Better luck next time!")
-        
-        
-            
+               
         
 if __name__ == "__main__":
     main()
