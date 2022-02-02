@@ -70,16 +70,17 @@ def main():
                     x = rollDice()
                     if (x == point):
                         print(x, "Big Winner!")
-                        if(point == 4 or 10):
+                        if(point == 4 or point == 10):
                             backBet = backBet + (2 * backBet)
                             bet = bet + backBet
-                        elif(point == 5 or 9):
+                        elif(point == 5 or point == 9):
                             backBet = backBet + (3/2 * backBet)
                             bet = bet + backBet
-                        elif(point == 6 or 8):
+                        elif(point == 6 or point == 8):
                             backBet = backBet + (7/6 * backBet)
                             bet = bet + backBet
                         Player1.winner(bet)
+                        break
                     elif (x == 7):
                         bet = bet + backBet
                         print(x,"out, Loser!")
@@ -88,6 +89,9 @@ def main():
                     else:
                         print(x)
                         rollDice()
+                        if(Player1.getBalance() < 0):
+                            print("You ran out of Money!")
+                            break
             else:
                 rollDice()
         Player1.getStr()
