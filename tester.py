@@ -32,7 +32,14 @@ def display_menu():
     print("add - add a Player")
     print("del - delete a Player")
     print("dep - Make a Deposit")
+    
 
+def write_players(players_list):
+    with open(FILENAME, 'w') as file:
+        for line in file:
+            line = line.replace('\n', '')
+            players_list.append(line)
+    return players_list
 
 def read_players():
     players_list = []
@@ -42,32 +49,29 @@ def read_players():
             players_list.append(line)
     return(players_list)
 
-def list():
+
+def list(players_list):
     """
     The list function displays the list of Reviews by reviwer username
     """
     
-    with open(FILENAME, newline="") as file:
-        players_list = []
-        reader = csv.DictReader(file)
-        i = 1
-        print()
-        for line in reader:
-            print(str(i) + ". " + line[0])
-            i += 1
-        print()
+    for i in range(len(players_list)):
+        player = players_list[i]
+        print(str(i+1) , '.' , player)
+    print()
 
-def add():
 
-    players = []
+def add(players_list):
 
     playerName = input("Enter player name")
     playerBalance = int(input("Enter player balance"))
-    with open(FILENAME, newline='') as f:
-        write = csv.DictWriter(f,['playerName'], ['playerBalance'])
-        write.writeheader()
-        for player in players:
-            write.writerow(player)
+    player = []
+    player.append(playerName)
+    player.append(playerBalance)
+    players_list.append(player)
+    write_players(players_list)
+    print(playerName , ' was added to the list')
+
 
 def main():
     print("Welcome to the craps table program")
@@ -81,11 +85,15 @@ def main():
 
     while(command.lower() != 'exit'):
         if (command.lower() == 'list'):
-            list()
+            list(players_list)
+            display_menu()
         elif (command.lower() == 'add'):
-            add()
+            add(players_list)
+            display_menu()
         else:
             print("Invalid command")
+
+        command = input("enter command = ")
 
 
 if __name__ == "__main__":
