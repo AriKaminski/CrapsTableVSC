@@ -6,7 +6,7 @@ import random
 
 class Player():
    
-    def __init__(self, name = "player", balance = 0):
+    def __init__(self, name = "player", balance = 100):
         self.__name = name
         self.__balance = balance
        
@@ -52,7 +52,7 @@ def main():
             print("You ran out of money!")
             break
         bet = int(input("How much would you like to bet? "))
-        Player1.setBalance(Player1.getBalance() - bet)
+
         comeOut = True
         while comeOut == True:
             point = rollDice()
@@ -68,7 +68,7 @@ def main():
                 print("The point is :", point)
                 comeOut = False
                 if(Player1.getBalance() >= 0):
-                    print("Your balance is currently = ",Player1.getBalance())
+                    print("Your balance is currently = ",(Player1.getBalance() - bet))
                     backBet = int(input("Enter amount for back bet = "))
                 else:
                     print("You do not have money for a back bet")
