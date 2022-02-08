@@ -5,30 +5,30 @@
 import random
 
 class Player():
-    
+   
     def __init__(self, name = "player", balance = 0):
         self.__name = name
         self.__balance = balance
-        
-    def setName(self):
+       
+    def setName(self, name):
         self.__name = name
-    
-    def setBalance(self):
+   
+    def setBalance(self, balance):
         self.__balance = balance
-        
+       
     def getName(self):
         return self.__name
-    
+   
     def getBalance(self):
         return self.__balance
-    
+   
     def getStr(self):
         print(self.__name + " (Balance = " + str(self.__balance) + ")" )
-        
+       
     def winner(self, d):
         self.__balance = self.__balance + d
         return self.__balance
-    
+   
     def loser(self, w):
         self.__balance = self.__balance - w
         return self.__balance
@@ -41,16 +41,18 @@ def rollDice():
 
 def main():
     name = input("What is your name? = ")
-    
+   
     Player1 = Player(name, 100)
     Player1.getStr()
-    
+   
     keepPlaying = 'yes'
-    if (Player1.getBalance() > 0):
-            keepPlaying = 'yes'
-    
+   
     while keepPlaying == "yes" or keepPlaying == "y" or keepPlaying == "Y":
+        if (Player1.getBalance() <= 0):
+            print("You ran out of money!")
+            break
         bet = int(input("How much would you like to bet? "))
+        Player1.setBalance(Player1.getBalance() - bet)
         comeOut = True
         while comeOut == True:
             point = rollDice()
@@ -65,7 +67,11 @@ def main():
             elif (point == 4 or point == 5 or point == 6 or point == 8 or point == 9 or point == 10):
                 print("The point is :", point)
                 comeOut = False
-                backBet = int(input("Enter amount for back bet = "))
+                if(Player1.getBalance() >= 0):
+                    print("Your balance is currently = ",Player1.getBalance())
+                    backBet = int(input("Enter amount for back bet = "))
+                else:
+                    print("You do not have money for a back bet")
                 while comeOut == False:
                     x = rollDice()
                     if (x == point):
@@ -75,10 +81,10 @@ def main():
                             bet = bet + backBet
                         elif(point == 5 or point == 9):
                             backBet = backBet + (3/2 * backBet)
-                            bet = bet + backBet
+                            bet = bet + backBet -.5
                         elif(point == 6 or point == 8):
                             backBet = backBet + (7/6 * backBet)
-                            bet = bet + backBet
+                            bet = bet + backBet -.5
                         Player1.winner(bet)
                         break
                     elif (x == 7):
@@ -102,10 +108,6 @@ def main():
     else:
         print("Better luck next time!")
                
-        
+       
 if __name__ == "__main__":
     main()
-    
-    
-    
-    
