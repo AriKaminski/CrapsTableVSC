@@ -1,5 +1,6 @@
 FILENAME = "CrapsPlayers.csv"
 import csv
+from pdb import line_prefix
 class Player():
     
     def __init__(self, name = "player", balance = 0):
@@ -51,8 +52,8 @@ def list():
         reader = csv.DictReader(file)
         i = 1
         print()
-        for name in reader:
-            print(str(i) + ". " + name[0])
+        for line in reader:
+            print(str(i) + ". " + line[0])
             i += 1
         print()
 
