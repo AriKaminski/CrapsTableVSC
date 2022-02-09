@@ -2,7 +2,8 @@
 
 Interactive text based Craps Table game using VSC
 
-Current Features:
+## Current Features:
+
 Player1 object used for following
 
 Pass line betting
@@ -15,7 +16,7 @@ Point betting with backbet capability
 
 Big winner or big loser on 7-out
 
-Features to be added:
+## Features to be added:
 
 GUI
 
