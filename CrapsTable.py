@@ -1,6 +1,6 @@
 #This is a Craps Table simulation game
 #Author - Ari Kaminski
-#Version 1.1 - working table with limited betting
+#Version 1.2 - Working pass line betting with backbet. Bets rounded down on decimal payout
 
 import random
 import math
@@ -104,7 +104,7 @@ def main():
                 rollDice()
         Player1.getStr()
         keepPlaying = input("Would you like to play again? (y / n) = ")                 # Tracks player input so loop is not infinite
-    print("Thanks for playing! Your balance is $", Player1.getBalance())                  # End of game message, displays player balance
+    print("Thanks for playing! Your balance is $", Player1.getBalance())                # End of game message, displays player balance
     if (Player1.getBalance() > 100):                                                    # Checks if player balance is higher than starting balance
         print("You beat the house!")
     else:                                                                               # checks if player balance is lower than starting balance
