@@ -24,7 +24,7 @@ class Player(): #This is the player object class
         return self.__balance
    
     def getStr(self):
-        print(self.__name + " (Balance = " + str(self.__balance) + ")" )                    # Prints user name and user balance
+        print(self.__name + " (Balance = $" + str(self.__balance) + ")" )                    # Prints user name and user balance
        
     def winner(self, d):                                    # Updates balance with user bet when winning a comeout roll or hitting a point when comeOut = false
         self.__balance = self.__balance + d                 
@@ -52,25 +52,25 @@ def main():
         if (Player1.getBalance() <= 0):                                                 #Ends main loop if player attempts to play with 0 dollars
             print("You ran out of money!")
             break
-        bet = int(input("How much would you like to bet? "))                            # First pass line bet, start of game
+        bet = int(input("How much would you like to bet? $ "))                            # First pass line bet, start of game
 
         comeOut = True                                                                  # comeOut starts the comeout roll, first phase of game
         while comeOut == True:                                                          # comeOut roll gameplay loop. Operates one time
             point = rollDice()                                                          # sets point equal to rollDice()
             if (point == 2 or point == 3 or point == 12):                               # Craps, losing bet if playing pass line
                 Player1.loser(bet)                                                      # Subtracts the users bet from player balance
-                print(point, "Craps! Your balance is", Player1.getBalance())
+                print(point, "Craps! Your balance is $ ", Player1.getBalance())
                 break
             elif (point == 7 or point == 11):                                           # Winner, pays 1 to 1 based on user pass line bet.
                 Player1.winner(bet)                                                     # Adds the users winnings to player balance
-                print(point, "Winner! Your balance is", Player1.getBalance())
+                print(point, "Winner! Your balance is $ ", Player1.getBalance())
                 break
             elif (point == 4 or point == 5 or point == 6 or point == 8 or point == 9 or point == 10):       # Sets a point for phase 2
                 print("The point is :", point)
                 comeOut = False                                                         # Stops phase 1, setting the above while loop to false
                 if(Player1.getBalance() >= 0): 
-                    print("Your balance is currently = ",(Player1.getBalance() - bet))
-                    backBet = int(input("Enter amount for back bet = "))
+                    print("Your balance is currently = $",(Player1.getBalance() - bet))
+                    backBet = int(input("Enter amount for back bet = $ "))
                 else:
                     print("You do not have money for a back bet")
                 while comeOut == False:                                                 # Start of phase 2, the rolling phase
@@ -104,7 +104,7 @@ def main():
                 rollDice()
         Player1.getStr()
         keepPlaying = input("Would you like to play again? (y / n) = ")                 # Tracks player input so loop is not infinite
-    print("Thanks for playing! Your balance is", Player1.getBalance())                  # End of game message, displays player balance
+    print("Thanks for playing! Your balance is $", Player1.getBalance())                  # End of game message, displays player balance
     if (Player1.getBalance() > 100):                                                    # Checks if player balance is higher than starting balance
         print("You beat the house!")
     else:                                                                               # checks if player balance is lower than starting balance
