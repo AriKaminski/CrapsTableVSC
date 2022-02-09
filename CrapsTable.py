@@ -3,6 +3,7 @@
 #Version 1.1 - working table with limited betting
 
 import random
+import math
 
 class Player(): #This is the player object class
    
@@ -23,13 +24,13 @@ class Player(): #This is the player object class
         return self.__balance
    
     def getStr(self):
-        print(self.__name + " (Balance = " + str(self.__balance) + ")" )
+        print(self.__name + " (Balance = " + str(self.__balance) + ")" )                    # Prints user name and user balance
        
-    def winner(self, d):
-        self.__balance = self.__balance + d
+    def winner(self, d):                                    # Updates balance with user bet when winning a comeout roll or hitting a point when comeOut = false
+        self.__balance = self.__balance + d                 
         return self.__balance
    
-    def loser(self, w):
+    def loser(self, w):                                     # Updates balance with user bet when losing a comeout roll or 7-out when comeOut = false
         self.__balance = self.__balance - w
         return self.__balance
 
@@ -81,10 +82,11 @@ def main():
                             bet = bet + backBet                                         # adds backbet payout to original bet
                         elif(point == 5 or point == 9):             
                             backBet = backBet + (3/2 * backBet)                         
-                            bet = bet + backBet -.5                                     # -.5 is rounding down casino payout based on backbet, needs fix
+                            bet = bet + backBet                                     
                         elif(point == 6 or point == 8):
                             backBet = backBet + (7/6 * backBet)
-                            bet = bet + backBet -.5                                     # Needs to notice if backbet has a decimal and round down
+                            bet = bet + backBet                                         # Needs to notice if backbet has a decimal and round down
+                        bet = bet // 1                                                  # Takes the modified bet and rounds down to nearest int, as the casino would
                         Player1.winner(bet)
                         break
                     elif (x == 7):                                                      # 7 out, player loses passline bet and original bet
