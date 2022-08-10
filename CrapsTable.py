@@ -4,6 +4,7 @@
 
 import random
 import math
+#import dicerollergui
 
 class Player(): #This is the player object class
    
@@ -34,6 +35,9 @@ class Player(): #This is the player object class
         self.__balance = self.__balance - w
         return self.__balance
 
+#def diceGUI():
+    #dicerollergui.roll_dice()
+
 def rollDice():                                             #rolldice() simulates the rolling of dice
     die1 = random.randint(1,6)                              #Rolls a single die between 1-6
     die2 = random.randint(1,6)                              
@@ -49,7 +53,7 @@ def main():
     keepPlaying = 'yes'                                     # How I decided to control the main game loops below
    
     while keepPlaying == "yes" or keepPlaying == "y" or keepPlaying == "Y":             #Start of main loop, ends if player does not enter y
-        if (Player1.getBalance() <= 0):                                                 #Ends main loop if player attempts to play with 0 dollars
+        if (Player1.getBalance() <= 1):                                                 #Ends main loop if player attempts to play with 0 dollars
             print("You ran out of money!")
             break
         bet = int(input("How much would you like to bet? $ "))                            # First pass line bet, start of game
@@ -68,11 +72,12 @@ def main():
             elif (point == 4 or point == 5 or point == 6 or point == 8 or point == 9 or point == 10):       # Sets a point for phase 2
                 print("The point is :", point)
                 comeOut = False                                                         # Stops phase 1, setting the above while loop to false
-                if(Player1.getBalance() >= 0): 
+                if((Player1.getBalance() - bet) <= 0): 
+                    print("You do not have enough for backbet")
+                    backBet = 0
+                else:
                     print("Your balance is currently = $",(Player1.getBalance() - bet))
                     backBet = int(input("Enter amount for back bet = $ "))
-                else:
-                    print("You do not have money for a back bet")
                 while comeOut == False:                                                 # Start of phase 2, the rolling phase
                     x = rollDice()                                                      # This rolls dice until a point is hit or 7-out
                     if (x == point):                                                    # If point is hit, big winner and breaks loop.
@@ -97,9 +102,6 @@ def main():
                     else:                                                               # Continues the loop until point or 7 is rolled
                         print(x)
                         rollDice()
-                        if(Player1.getBalance() < 0):
-                            print("You ran out of Money!")
-                            break
             else:
                 rollDice()
         Player1.getStr()
