@@ -1,6 +1,7 @@
 # CrapsTableVSC
 
 Interactive text based Craps Table game using VSC
+Created using Python 3
 
 ## Current Features:
 
