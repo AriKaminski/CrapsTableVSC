@@ -5,7 +5,6 @@ root = Tk()
 root.title('Dice roller!')
 root.geometry("500x500")
 
-
 # roll dice
 def roll_dice():
     d1 = random.choice(my_dice)
@@ -31,7 +30,7 @@ dice_label2 = Label(my_frame, text='', font=("Arial", 100))
 dice_label2.grid(row=0, column=1, padx=5)
 
 # create button
-my_button = Button(root, text="roll dice", command=roll_dice)
+my_button = Button(root, text="Roll Dice", command=roll_dice)
 my_button.pack(pady=20)
 
 root.mainloop()
